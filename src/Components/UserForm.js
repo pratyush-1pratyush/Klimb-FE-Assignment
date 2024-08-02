@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
 
-const UserForm = ({onSubmit, initialValues, onCancel}) => {
+const UserForm = ({formMode, onSubmit, initialValues, onCancel}) => {
 
- 
-  
     const initial = [
         {
           Name:"",
@@ -76,10 +74,17 @@ const UserForm = ({onSubmit, initialValues, onCancel}) => {
 
       return (
         <div className="mt-10 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64">
+        
+        <h2 className="m-2 w-full text-left text-xl text-gray-500 mb-4">
+        {formMode === 'edit' ? 'Edit User' : 'Add User'}
+      </h2>
         <form
           onSubmit={handleSubmit}
           className="border-2 border-gray-300 p-4 sm:p-6 md:p-8 lg:p-10 rounded-lg flex flex-wrap justify-between"
         >
+           
+            <p className='w-full text-right mb-4 italic text-gray-400'>All fields are mandatory</p>
+          
           <div className="w-full md:w-1/2 lg:w-1/3 p-2">
             <div className="flex flex-col">
               <label className="mb-1"> NAME <span className="text-red-500">*</span></label>

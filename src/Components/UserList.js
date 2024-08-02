@@ -1,4 +1,4 @@
-import React, { useState,} from 'react';
+import React, {useState,} from 'react';
 import UserForm from './UserForm';
 import TD from "../CSSComponents/TD";
 import TH from "../CSSComponents/TH";
@@ -47,7 +47,7 @@ const UserList = () => {
   const [formMode, setFormMode] = useState('add');
   const [currentUser, setCurrentUser] = useState(null);
 
-
+  
  
 
   const handleSearchTextChange = (e) => {
@@ -86,7 +86,11 @@ const UserList = () => {
   };
 
   const handleFormSubmit = (newUser) => {
-    console.log(isAddClicked,"Add")
+    
+    if (userList.some((u) => u.Email === newUser.Email)) {
+      alert('Duplicate email is not allowed');
+      return;
+    }
     if (formMode === 'add') {
       if (userList.some((u) => u.Email === newUser.Email)) {
         alert('Duplicate email is not allowed');
@@ -112,7 +116,7 @@ const UserList = () => {
 
   return (
     isAddClicked ? (
-      <UserForm onSubmit={handleFormSubmit} initialValues={currentUser || {}} onCancel={handleCancel} />
+      <UserForm formMode={formMode} onSubmit={handleFormSubmit} initialValues={currentUser || {}} onCancel={handleCancel} />
     ) : (
       <div className='p-5 flex-col'>
         <div className='flex justify-between'>
