@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
+
 const UserForm = ({onSubmit, initialValues, onCancel}) => {
 
+ 
+  
     const initial = [
         {
           Name:"",
@@ -65,6 +68,7 @@ const UserForm = ({onSubmit, initialValues, onCancel}) => {
         if (Object.keys(validationErrors).length === 0) {
           
           onSubmit(formValues);
+          
         }
         console.log(formValues)
       };

@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,} from 'react';
 import UserForm from './UserForm';
+import TD from "../CSSComponents/TD";
+import TH from "../CSSComponents/TH";
+
 
 const UserList = () => {
   const initialList = [
@@ -68,6 +71,7 @@ const UserList = () => {
     setIsAddClicked(true);
     setFormMode('add');
     setCurrentUser(null);
+   
   };
 
   const handleEditClick = (user) => {
@@ -82,6 +86,7 @@ const UserList = () => {
   };
 
   const handleFormSubmit = (newUser) => {
+    console.log(isAddClicked,"Add")
     if (formMode === 'add') {
       if (userList.some((u) => u.Email === newUser.Email)) {
         alert('Duplicate email is not allowed');
@@ -90,6 +95,7 @@ const UserList = () => {
       setUserList((prevUserList) => {
         const updatedList = [...prevUserList, newUser];
         setFilteredUsers(updatedList);
+        
         return updatedList;
       });
     } else if (formMode === 'edit') {
@@ -117,6 +123,7 @@ const UserList = () => {
             </svg>
             <span className='pl-2'>Add</span>
           </button>
+          
         </div>
 
         <div className='flex flex-col mt-5'>
@@ -146,32 +153,33 @@ const UserList = () => {
           <table className='min-w-full border-collapse'>
             <thead>
               <tr>
-                <th className='py-2 px-4 border-b'>Name</th>
-                <th className='py-2 px-4 border-b'>Phone</th>
-                <th className='py-2 px-4 border-b'>Email</th>
-                <th className='py-2 px-4 border-b'>Role</th>
-                <th className='py-2 px-4 border-b'>Location</th>
-                <th className='py-2 px-4 border-b'>Department</th>
-                <th className='py-2 px-4 border-b'>Actions</th>
+                <TH>Name</TH>
+                <TH>Phone</TH>
+                <TH>Email</TH>
+                <TH>Type</TH>
+                <TH>Location</TH>
+                <TH>Function</TH>
+                <TH>Action</TH>
               </tr>
             </thead>
             <tbody>
               {filteredUsers.map((user, index) => (
                 <tr key={index}>
-                  <td className='py-2 px-4 border-b'>{user.Name}</td>
-                  <td className='py-2 px-4 border-b'>{user.Phone}</td>
-                  <td className='py-2 px-4 border-b'>{user.Email}</td>
-                  <td className='py-2 px-4 border-b'>{user.Type}</td>
-                  <td className='py-2 px-4 border-b'>{user.Location}</td>
-                  <td className='py-2 px-4 border-b'>{user.Function}</td>
-                  <td className='py-2 px-4 border-b'>
+                  <TD>{user.Name}</TD>
+                  <TD>{user.Phone}</TD>
+                  <TD>{user.Email}</TD>
+                  <TD>{user.Type}</TD>
+                  <TD>{user.Location}</TD>
+                  <TD>{user.Function}</TD>
+                  <TD>
                     <button
                       className='bg-blue-500 text-white px-4 py-2 rounded'
                       onClick={() => handleEditClick(user)}
                     >
                       Edit
                     </button>
-                  </td>
+                   
+                  </TD>
                 </tr>
               ))}
             </tbody>
